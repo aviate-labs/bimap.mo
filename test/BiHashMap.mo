@@ -3,8 +3,6 @@ import Iter "mo:base/Iter";
 import Nat "mo:base/Nat";
 import Text "mo:base/Text";
 
-import D "mo:base/Debug";
-
 import BiHashMap "../src/BiHashMap";
 
 do {

@@ -1,18 +1,21 @@
 import Hash "mo:base/Hash";
-import HashMap "mo:base/HashMap";
+import TrieMap "mo:base/TrieMap";
 import Iter "mo:base/Iter";
 import Result "mo:base/Result";
 
 module self {
-    public class BiHashMap<L, R>(
-        initCapacity : Nat,
+    public class BiTrieMap<L, R> (
         leftEqual    : (L, L) -> Bool,
         leftHash     : L -> Hash.Hash,
         rightEqual   : (R, R) -> Bool,
         rightHash    : R -> Hash.Hash,
     ) {
-        var leftToRight = HashMap.HashMap<L, R>(initCapacity, leftEqual, leftHash);
-        var rightToLeft = HashMap.HashMap<R, L>(initCapacity, rightEqual, rightHash);
+        var leftToRight = TrieMap.TrieMap<L, R>(
+            leftEqual, leftHash,
+        );
+        var rightToLeft = TrieMap.TrieMap<R, L>(
+            rightEqual, rightHash,
+        );
 
         // Returns the number of pairs in the bimap.
         public func size() : Nat {
@@ -26,8 +29,8 @@ module self {
 
         // Removes all pairs from the bimap.
         public func clear() {
-            leftToRight := HashMap.HashMap<L, R>(initCapacity, leftEqual, leftHash);
-            rightToLeft := HashMap.HashMap<R, L>(initCapacity, rightEqual, rightHash);
+            leftToRight := TrieMap.TrieMap<L, R>(leftEqual, leftHash);
+            rightToLeft := TrieMap.TrieMap<R, L>(rightEqual, rightHash); 
         };
 
         // Creates an iterator over the left-right pairs in the bimap.
@@ -152,10 +155,9 @@ module self {
         };
 
         // Clones the current state to a new bimap.
-        public func clone() : BiHashMap<L, R> {
+        public func clone() : BiTrieMap<L, R> {
             self.fromIter<L, R>(
                 entries(),
-                initCapacity,
                 leftEqual, leftHash,
                 rightEqual, rightHash,
             );
@@ -165,14 +167,12 @@ module self {
     // Convert the given iterator into a new bimap.
     public func fromIter<L, R>(
         iter         : Iter.Iter<(L, R)>,
-        initCapacity : Nat,
         leftEqual    : (L, L) -> Bool,
         leftHash     : L -> Hash.Hash,
         rightEqual   : (R, R) -> Bool,
         rightHash    : R -> Hash.Hash,
-    ) : BiHashMap<L, R> {
-        let m = BiHashMap<L, R>(
-            initCapacity,
+    ) : BiTrieMap<L, R> {
+        let m = BiTrieMap<L, R>(
             leftEqual, leftHash,
             rightEqual, rightHash,
         );
