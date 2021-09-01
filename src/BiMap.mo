@@ -218,24 +218,29 @@ module {
 
     // Copy the current state to a new bimap.
     public func copy<L, R>(
-        m : Map<L, R>,
-        empty : <L, R>() -> Map<L, R>,
-    ) : Map<L, R> {
+        m : BiMap<L, R>,
+        emptyL     : () -> Map<L, R>,
+        emptyR     : () -> Map<R, L>,
+        rightEqual : (R, R) -> Bool,
+    ) : BiMap<L, R> {
         fromIter<L, R>(
             m.entries(),
-            empty,
+            emptyL,
+            emptyR,
+            rightEqual,
         );
     };
 
     // Convert the given iterator into a new bimap.
+    // NOTE: duplicate values will get overwritten!
     public func fromIter<L, R>(
         iter  : Iter.Iter<(L, R)>,
-        empty : <L, R>() -> Map<L, R>,
-    ) : Map<L, R> {
-        let m = empty<L, R>();
-        for ((l, r) in iter) {
-            m.put(l, r);
-        };
+        emptyL : () -> Map<L, R>,
+        emptyR : () -> Map<R, L>,
+        rightEqual : (R, R) -> Bool,
+    ) : BiMap<L, R> {
+        let m = New<L, R>(emptyL, emptyR, rightEqual);
+        for ((l, r) in iter) { ignore m.replace(l, r); };
         m;
     };
 };

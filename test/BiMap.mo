@@ -65,4 +65,22 @@ for (empty in [
         assert(m.getByLeft(0) == ?"a");
         assert(i == 3);
     };
+
+    do {
+        let m = BiMap.New(
+            empty.0,
+            empty.1,
+            Text.equal,
+        );
+
+        ignore m.insert(0, "a");
+        ignore m.insert(1, "b");
+        ignore m.insert(2, "c");
+        
+        let c = BiMap.copy(m, empty.0, empty.1, Text.equal);
+        assert(Iter.toArray(m.entries()) == Iter.toArray(c.entries()));
+
+        let i = BiMap.fromIter(m.entries(), empty.0, empty.1, Text.equal);
+        assert(Iter.toArray(m.entries()) == Iter.toArray(i.entries()))
+    };
 };
