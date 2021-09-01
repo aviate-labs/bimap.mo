@@ -4,6 +4,8 @@ A Motoko module for bijective maps.
 
 A bimap (or "bidirectional map") is a map that preserves the uniqueness of its values as well as that of its keys.
 
+🛑 Do not use `mo:base/TrieMap`, there is a bug in which results in an `arithmetic overflow`.
+
 ## Usage
 
 ```motoko

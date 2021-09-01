@@ -6,16 +6,17 @@ import Text "mo:base/Text";
 
 import BiMap "../src/BiMap";
 import BiHashMap "../src/BiHashMap";
+import BiTrieMap "../src/BiTrieMap";
 
 for (empty in [
     (
         BiHashMap.empty<Nat,  Text>(0, Nat.equal, Hash.hash),
         BiHashMap.empty<Text, Nat>(0, Text.equal, Text.hash),
     ),
-    (
-        BiTrieMap.empty<Nat,  Text>(Nat.equal, Hash.hash),
-        BiTrieMap.empty<Text, Nat>(Text.equal, Text.hash),
-    ),
+    //(
+    //    BiTrieMap.empty<Nat,  Text>(Nat.equal, Hash.hash),
+    //    BiTrieMap.empty<Text, Nat>(Text.equal, Text.hash),
+    //),
 ].vals()) {
     do {
         let m = BiMap.New(
