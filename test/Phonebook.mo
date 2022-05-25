@@ -32,11 +32,6 @@ ignore m.insert("Bob", {
     phone = "555-1212";
 });
 
-ignore m.insert("Bob", {
-    desc  = "Home";
-    phone = "555-1212";
-});
-
 assert(m.getByLeft("Bob") == ?{
     desc  = "Home";
     phone = "555-1212";
