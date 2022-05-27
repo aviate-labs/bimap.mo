@@ -1,22 +1,23 @@
-import Hash "mo:base/Hash";
 import HashMap "mo:base/HashMap";
 import Iter "mo:base/Iter";
-import Nat "mo:base/Nat";
 import Text "mo:base/Text";
 
 import BiMap "../src/BiMap";
 import BiHashMap "../src/BiHashMap";
 import BiTrieMap "../src/BiTrieMap";
 
+let h = func (n : Nat32) : Nat32 { n };
+let e = func (x : Nat32, y : Nat32) : Bool { x == y };
+
 for (empty in [
     (
-        BiHashMap.empty<Nat,  Text>(0, Nat.equal, Hash.hash),
-        BiHashMap.empty<Text, Nat>(0, Text.equal, Text.hash),
+        BiHashMap.empty<Nat32, Text>(0, e, h),
+        BiHashMap.empty<Text, Nat32>(0, Text.equal, Text.hash),
     ),
-    //(
-    //    BiTrieMap.empty<Nat,  Text>(Nat.equal, Hash.hash),
-    //    BiTrieMap.empty<Text, Nat>(Text.equal, Text.hash),
-    //),
+    (
+        BiTrieMap.empty<Nat32, Text>(e, h),
+        BiTrieMap.empty<Text, Nat32>(Text.equal, Text.hash),
+    ),
 ].vals()) {
     do {
         let m = BiMap.New(
@@ -57,7 +58,7 @@ for (empty in [
         ignore m.insert(1, "b");
         ignore m.insert(2, "c");
         var i = 0;
-        m.retain(func (l : Nat, r : Text) : Bool {
+        m.retain(func (l : Nat32, r : Text) : Bool {
             i += 1;
             i <= 1; // Only keep first.
         });
