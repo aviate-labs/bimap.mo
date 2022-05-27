@@ -2,7 +2,7 @@ import Iter "mo:base/Iter";
 import Result "mo:base/Result";
 
 module {
-    type Overwritten<L, R> = {
+    public type Overwritten<L, R> = {
         #Neither;
         #Right : (L, R);
         #Pair  : (L, R);
