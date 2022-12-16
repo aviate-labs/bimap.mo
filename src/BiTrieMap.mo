@@ -1,6 +1,6 @@
 import BiMap "BiMap";
-import Hash "mo:base/Hash";
-import TrieMap "mo:base/TrieMap";
+import Hash "mo:base-0.7.3/Hash";
+import TrieMap "mo:base-0.7.3/TrieMap";
 
 module {
     // Creates an empty map generator function.

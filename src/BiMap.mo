@@ -1,5 +1,5 @@
-import Iter "mo:base/Iter";
-import Result "mo:base/Result";
+import Iter "mo:base-0.7.3/Iter";
+import Result "mo:base-0.7.3/Result";
 
 module {
     public type Overwritten<L, R> = {

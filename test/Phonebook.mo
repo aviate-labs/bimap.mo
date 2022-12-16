@@ -1,6 +1,6 @@
-import Hash "mo:base/Hash";
-import HashMap "mo:base/HashMap";
-import Text "mo:base/Text";
+import Hash "mo:base-0.7.3/Hash";
+import HashMap "mo:base-0.7.3/HashMap";
+import Text "mo:base-0.7.3/Text";
 
 import BiMap "../src/BiMap";
 import BiHashMap "../src/BiHashMap";
